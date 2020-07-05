@@ -1,8 +1,11 @@
 import React from 'react';
 
-function Movie(movieProps) {
+function Movie({title, score, image}) {
   return (
-    <h3>제목 : {movieProps.title} / 평점 : {movieProps.score}</h3>
+    <div>
+      <img src={image} alt="" title={title}/>
+      <h3>제목 : {title}<br/> 평점 : {score}</h3>
+    </div>
   );
 }
 
