@@ -5,7 +5,15 @@ import PropTypes from 'prop-types';
 // 클래스형 컴포넌트
 class App extends React.Component {
   // React.Component 클래스 상속받은 App 클래스 생성
+  
+  // ================ life cycle(Mount) =======================
+  constructor(props) {
+    super(props);
+    console.log('constructor!');
+  }
+
   render() {
+    console.log('render - component rendering!');
     return (
       <div>
         <h1>
@@ -15,14 +23,33 @@ class App extends React.Component {
         </h1>
         {movieList.map(movie => (
           <Movie key={movie.id} title={movie.title} score={movie.score} image={movie.image}/>
-        ))}
+          ))}
       </div>
     );
   }
+  
+  componentDidMount() {
+    console.log('componentDidMount - component rendered!');
+  }
+  
+  // ================ life cycle(Update) =======================
+  componentDidUpdate() {
+    console.log('componentDidUpdate - component just updated!');
+  }
+  
+  // ================ life cycle(Unmount) =======================
+  componentWillUnmount() {
+    // 컴포넌트 떨어져 나가기 직전?
+    // 이벤트 리스너 제거할때 많이 사용
+    console.log('componentWillUnmount!');
+  }
+
+  // ================ state =======================
   state = {
     count: 0
   };
 
+  // ================ function =======================
   addCount = () => {
     // current로 현재 state가 넘어옴
     this.setState(current => ({
@@ -36,18 +63,6 @@ class App extends React.Component {
     }));
   }
 }
-
-// 함수형 컴포넌트
-// function App() {
-//   return (
-//     <div>
-//       <h1>&lt;영화 목록&gt;</h1>
-//       {movieList.map(movie => (
-//         <Movie key={movie.id} title={movie.title} score={movie.score} image={movie.image}/>
-//       ))}
-//     </div>
-//   );
-// }
 
 // 영화 목록(임시데이터 하드코딩)
 const movieList = [
