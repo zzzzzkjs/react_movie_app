@@ -2,16 +2,52 @@ import React from 'react';
 import Movie from './components/Movie';
 import PropTypes from 'prop-types';
 
-function App() {
-  return (
-    <div>
-      <h1>&lt;영화 목록&gt;</h1>
-      {movieList.map(movie => (
-        <Movie key={movie.id} title={movie.title} score={movie.score} image={movie.image}/>
-      ))}
-    </div>
-  );
+// 클래스형 컴포넌트
+class App extends React.Component {
+  // React.Component 클래스 상속받은 App 클래스 생성
+  render() {
+    return (
+      <div>
+        <h1>
+          &lt;영화 목록&gt; - state : {this.state.count}&nbsp;
+          <button onClick={this.addCount}>Add</button>
+          <button onClick={this.minusCount}>Minus</button>
+        </h1>
+        {movieList.map(movie => (
+          <Movie key={movie.id} title={movie.title} score={movie.score} image={movie.image}/>
+        ))}
+      </div>
+    );
+  }
+  state = {
+    count: 0
+  };
+
+  addCount = () => {
+    // current로 현재 state가 넘어옴
+    this.setState(current => ({
+      count: current.count + 1
+    }));
+  }
+  
+  minusCount = () => {
+    this.setState(current => ({
+      count: current.count - 1
+    }));
+  }
 }
+
+// 함수형 컴포넌트
+// function App() {
+//   return (
+//     <div>
+//       <h1>&lt;영화 목록&gt;</h1>
+//       {movieList.map(movie => (
+//         <Movie key={movie.id} title={movie.title} score={movie.score} image={movie.image}/>
+//       ))}
+//     </div>
+//   );
+// }
 
 // 영화 목록(임시데이터 하드코딩)
 const movieList = [
